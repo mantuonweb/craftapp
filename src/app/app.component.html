@@ -1,14 +1,31 @@
-<alert type="success">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</alert>
-<alert type="info">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</alert>
-<alert type="warning">
-  <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</alert>
-<alert type="danger">
-  <strong>Oh snap!</strong> Change a few things up and try submitting again.
-</alert>
+<div class="d-flex">
+  <app-sidebar [toggled]="toggled"></app-sidebar>
 
-<router-outlet></router-outlet>
+  <div class="page-content-wrapper">
+    <!-- <button (click)="toggleSideBar()" class="btn btn-link toggle-achor" [ngClass]="{toggled}"><i class="bi" [ngClass]="{'bi-list':toggled ,'bi-x-circle':!toggled}"></i></button> -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+      <div class="container-fluid">
+        <button (click)="toggleSideBar()" class="btn btn-link toggle-achor navbar-brand" [ngClass]="{toggled}"><i class="bi" [ngClass]="{'bi-list':toggled ,'bi-x-circle':!toggled}"></i></button>
+        <!-- <a class="navbar-brand" href="#">Always expand</a> -->
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+  
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+          <form>
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>

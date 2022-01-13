@@ -1,0 +1,11 @@
+.app-side-bar{
+    .sidebar-inner{
+        height: 100vh;
+        transition: margin 0.25s ease-out;
+    }
+    &.toggled{
+        .sidebar-inner{
+            margin-left:-280px;
+        }
+    }
+}

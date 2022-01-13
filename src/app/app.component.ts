@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'craftapp';
+  toggled = false;
+  toggleSideBar(){
+    this.toggled = !this.toggled;
+
+  }
 }
