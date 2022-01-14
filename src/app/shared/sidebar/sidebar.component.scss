@@ -8,4 +8,20 @@
             margin-left:-280px;
         }
     }
+    .brand-name{
+        display: flex;
+        color:white;
+        font-size: 2rem;
+        text-decoration: none;
+        .brand{
+            flex:1 1 0;
+            align-items: center;
+        }
+        .b-icon{
+            margin-right: 10px;
+        }
+        .sidebar-anchor{
+            align-items: center;
+        }
+    }
 }
