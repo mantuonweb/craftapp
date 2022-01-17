@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AgGridModule } from 'ag-grid-angular';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,6 +12,7 @@ import { AgGridModule } from 'ag-grid-angular';
     SidebarComponent
   ],
   imports: [
+    RouterModule,
     CommonModule,
     HighchartsChartModule,
     AgGridModule.withComponents([]),

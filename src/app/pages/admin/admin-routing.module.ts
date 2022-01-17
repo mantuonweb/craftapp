@@ -8,9 +8,11 @@ const routes: Routes = [{
   component:AdminComponent,
   children: [
     { path: '',redirectTo: 'dashboard',pathMatch: 'full'},
-    { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) }
+    { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+    { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) }
   ]
-}];
+}]
+ 
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

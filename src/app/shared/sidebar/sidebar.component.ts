@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SidebarComponent implements OnInit {
   @Input() toggled = false;
   @Output() onClose = new EventEmitter<boolean>()
+  @Output() onClick = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
