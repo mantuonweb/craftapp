@@ -7,3 +7,15 @@
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+.page-content-wrapper {
+    width: 100%;
+}
+
+.toggle-achor {
+    font-size: 2rem;
+}
+
+.sidebar{
+    position: fixed;
+    z-index: 500;
+}

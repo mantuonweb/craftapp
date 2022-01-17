@@ -5,21 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { HighchartsChartModule } from 'highcharts-angular';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AgGridModule.withComponents([]),
-    HighchartsChartModule,
     SharedModule
   ],
   providers: [],

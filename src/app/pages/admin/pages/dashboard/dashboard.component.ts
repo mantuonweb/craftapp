@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColDef, GridApi } from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
 import * as Highcharts from 'highcharts';
 
 @Component({

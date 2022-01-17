@@ -1,28 +1,3 @@
 <div>
-  <app-sidebar class="sidebar" (onClose)="closeSideBar()" [toggled]="toggled"></app-sidebar>
-
-  <div class="page-content-wrapper">
-    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
-      <div class="container-fluid">
-        <button (click)="toggleSideBar()" class="btn btn-link toggle-achor navbar-brand" [ngClass]="{toggled}"><i
-            class="bi" [ngClass]="{'bi-list':toggled ,'bi-x-circle':!toggled}"></i></button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample02">
-          <ul class="navbar-nav me-auto">
-            <a class="d-flex align-items-center text-white text-decoration-none" id="dropdownUser1"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://lh3.googleusercontent.com/ogw/ADGmqu9UP7TlIlQaDV020ZhZ4rWAm9fonMkyQzn0SQjK=s83-c-mo" alt="" width="32" height="32" class="rounded-circle me-2">
-              <!-- <strong>Mantu</strong> -->
-            </a>
-          </ul>
-          <form>
-
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </div>
-    </nav>
-    <app-dashboard></app-dashboard>
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
 </div>

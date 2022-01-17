@@ -9,10 +9,4 @@ export class AppComponent {
   title = 'craftapp';
   toggled = true;
 
-  toggleSideBar() {
-    this.toggled = !this.toggled;
-  }
-  closeSideBar() {
-    this.toggled = true;
-  }
 }
