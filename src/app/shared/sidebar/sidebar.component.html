@@ -11,29 +11,10 @@
         </div>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a [routerLink]="['/admin/dashboard']" class="nav-link text-white"  routerLinkActive="active" aria-current="page">
-                    <i class="bi bi-house"></i>
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a class="nav-link text-white" [routerLink]="['/admin/items']">
-                    <i class="bi bi-grid"></i>
-                    Items
-                </a>
-            </li>
-            <li>
-                <a class="nav-link text-white" [routerLink]="['/admin/invoices']">
-                    <i class="bi bi-file-earmark-spreadsheet"></i>
-                    Invoice
-                </a>
-            </li>
-
-            <li>
-                <a [routerLink]="['/admin/customers']" class="nav-link text-white" routerLinkActive="active">
-                    <i class="bi bi-person-circle"></i>
-                    Customers
+            <li class="nav-item" *ngFor="let route of routeList">
+                <a [routerLink]="[route.route]" class="nav-link text-white"  routerLinkActive="active" aria-current="page">
+                    <i class="bi bi-house" [ngClass]="route.cssClass"></i>
+                    {{route.displayName}}
                 </a>
             </li>
         </ul>
