@@ -9,7 +9,7 @@ const routes: Routes = [{
   children: [
     { path: '',redirectTo: 'dashboard',pathMatch: 'full'},
     { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
-    { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) }
+    { path: 'customers', loadChildren: () => import('./pages/customers/customers.module').then(m => m.CustomersModule) }
   ]
 }]
  
