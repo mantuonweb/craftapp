@@ -1,7 +1,11 @@
 <div class="page-content">
     <div class="action">
         <button class="btn btn-dark" (click)="toggleFloating()">
-           Filter <i class="bi bi-filter"></i>
+           Filter 
+           <i class="bi bi-filter" *ngIf="(!floatingFilter);else tag "></i>
+           <ng-template #tag> 
+            <i  class="bi bi-x"></i>
+           </ng-template>
         </button>
         <button class="btn btn-dark">
             <i class="bi bi-plus-lg"></i> New Customer
