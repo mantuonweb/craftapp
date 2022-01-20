@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -33,7 +34,7 @@ export class CustomersComponent implements OnInit {
     { name: 'test', phone: '9999999999', addedon: '21/01/2022', amountdue: 72000 }
   ];
   rowSelection = 'multiple';
-  constructor() { }
+  constructor(private router:Router,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -58,5 +59,13 @@ export class CustomersComponent implements OnInit {
     var displayedColumns = params.columnApi.getAllDisplayedColumns();
     var thisIsFirstColumn = displayedColumns[0] === params.column;
     return thisIsFirstColumn;
+  }
+
+  add(){
+    this.router.navigate(['create'],{relativeTo: this.activatedRoute})
+  }
+  edit(){
+    const id = 123;
+    this.router.navigate(['edit',id],{relativeTo: this.activatedRoute})
   }
 }
