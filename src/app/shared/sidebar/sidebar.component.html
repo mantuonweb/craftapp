@@ -5,8 +5,8 @@
                 <i class="bi bi-apple b-icon"></i>
                 <span class="fs-4">Craft App</span>
             </div>
-            <div class="sidebar-anchor">
-                <i class="bi" [ngClass]="{'bi-list':toggled ,'bi-x-circle':!toggled}" (click)="toggleSideBar()"></i>
+            <div class="sidebar-anchor" #sidebarAnchor>
+                <i class="sidebar-anchor-icon bi" [ngClass]="{'bi-list':toggled ,'bi-x-circle':!toggled}" (click)="toggleSideBar()"></i>
             </div>
         </div>
         <hr>
