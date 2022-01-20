@@ -1,1 +1,184 @@
-<p>add-customer works!</p>
+<div class="page-content">
+    <div class="action">
+       
+        <button class="btn btn-dark" (click)="save()">
+            <i class="bi bi-plus-lg"></i> New Customer
+        </button>
+    </div>
+    <form>
+        <div class="row basic-information">
+            <div class="col-md-3">
+                <div class="section-title">
+                    Basic Information
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="displayName">Display Name</label>
+                        <input type="text" class="form-control" id="displayName" placeholder="Display Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="primaryContactName">Primary Contact Name</label>
+                        <input type="text" class="form-control" id="primaryContactName"
+                            placeholder="Primary Contact Name">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" inputmode="email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Phone" inputmode="tel">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="primaryCurrency">Primary Currency</label>
+                        <ng-select id="primaryCurrency"
+                                placeholder="Primary Currency"
+                                [items]="currencies" 
+                                bindLabel="Currency" 
+                                bindValue="AlphabeticCode" 
+                              >
+                        </ng-select>
+                        <!-- <input type="text" class="form-control" id="primaryCurrency" placeholder="Primary Currency"> -->
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="website">Website</label>
+                        <input type="text" class="form-control" id="website" placeholder="Website" inputmode="tel">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="prefix">Prefix</label>
+                        <input type="text" class="form-control" id="prefix" placeholder="Prefix">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row billing-address">
+            <div class="col-md-3">
+                <div class="section-title">
+                    Billing Address
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="baName">Name</label>
+                        <input type="text" class="form-control" id="baName" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="baCountry">Country</label>
+                            <ng-select id="baCountry"
+                                    placeholder="Country"
+                                    [items]="countries" 
+                                    bindLabel="name" 
+                                    bindValue="code" 
+                                >
+                            </ng-select>
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="baState">State</label>
+                        <input type="text" class="form-control" id="baState" placeholder="State">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="saCity">City</label>
+                        <input type="text" class="form-control" id="saCity" placeholder="City">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="baAddress">Address</label>
+                        <input type="text" class="form-control" id="baAddress" placeholder="Address">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="baPhone">Phone</label>
+                        <input type="text" class="form-control" id="baPhone" placeholder="Phone" inputmode="tel">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="baZipCode">Zip Code</label>
+                        <input type="text" class="form-control" id="baZipCode" placeholder="Zip Code">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row shipping-address">
+            <div class="col-md-3">
+                <div class="section-title">
+                    Shipping Address
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="saName">Name</label>
+                        <input type="text" class="form-control" id="saName" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="saCountry">Country</label>
+                            <ng-select id="saCountry"
+                                    placeholder="Country"
+                                    [items]="countries" 
+                                    bindLabel="name" 
+                                    bindValue="code" 
+                                >
+                            </ng-select>
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="saState">State</label>
+                        <input type="text" class="form-control" id="saState" placeholder="State">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="saCity">City</label>
+                        <input type="text" class="form-control" id="saCity" placeholder="State">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="saAddress">Address</label>
+                        <input type="text" class="form-control" id="saAddress" placeholder="Address">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="saPhone">Phone</label>
+                        <input type="text" class="form-control" id="saPhone" placeholder="Phone" inputmode="tel">
+                    </div>
+                </div>
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="saZipCode">Zip Code</label>
+                        <input type="text" class="form-control" id="saZipCode" placeholder="Zip Code">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row custom-address">
+            <div class="col-md-3">
+                <div class="section-title">
+                    Custom Address
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-row row">
+                    <div class="form-group col-md-6">
+                        <label for="customfields">Custom Fields</label>
+                        <input type="text" class="form-control" id="customfields" placeholder="Custom Fields">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
+    </form>
+</div>
