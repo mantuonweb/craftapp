@@ -23,7 +23,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule
   ],
   exports: [
-    SidebarComponent, HighchartsChartModule, AgGridModule, CommonModule,    
+    SidebarComponent, 
+    HighchartsChartModule, 
+    AgGridModule,
+    CommonModule,    
     NgSelectModule, 
     FormsModule,
     ReactiveFormsModule]
