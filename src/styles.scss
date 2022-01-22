@@ -11,7 +11,15 @@
 .page-content-wrapper {
     width: 100%;
 }
-
+body{
+    background: #F1F5F9;
+}
+.btn-light{
+    border: 1px solid #212529 !important;
+}
+.error-message{
+    color:red;
+}
 .toggle-achor {
     font-size: 2rem;
 }
@@ -31,4 +39,10 @@
 }
 .ag-selection-checkbox.ag-invisible{
     display:none !important;
+}
+.required{
+    &:after {
+        content: "*" !important;
+        color:red !important;
+    }
 }

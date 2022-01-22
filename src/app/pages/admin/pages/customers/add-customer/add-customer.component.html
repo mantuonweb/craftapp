@@ -1,37 +1,40 @@
 <div class="page-content">
     <div class="action">
        
-        <button class="btn btn-dark" (click)="save()">
-            <i class="bi bi-plus-lg"></i> New Customer
+        <button class="btn btn-dark" [disabled]="!customerForm?.valid" (click)="save()">
+            <i class="bi bi-arrow-down-square"></i> New Customer
         </button>
     </div>
-    <form>
+    <form [formGroup]="customerForm">
         <div class="row basic-information">
             <div class="col-md-3">
                 <div class="section-title">
                     Basic Information
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" formGroupName="basicInformation">
                 <div class="form-row row">
                     <div class="form-group col-md-6">
-                        <label for="displayName">Display Name</label>
-                        <input type="text" class="form-control" id="displayName" placeholder="Display Name">
+                        <label for="displayName">Display Name<span class="required"></span></label>
+                        <input type="text" class="form-control" id="displayName" placeholder="Display Name" formControlName="displayName">
+                        <div class="error-message" *ngIf="(bif?.displayName?.touched && bif?.displayName?.dirty) && bif?.displayName?.errors?.required">
+                            Display Name Required
+                        </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="primaryContactName">Primary Contact Name</label>
-                        <input type="text" class="form-control" id="primaryContactName"
+                        <input type="text" class="form-control" id="primaryContactName" formControlName="primaryContactName"
                             placeholder="Primary Contact Name">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" inputmode="email">
+                        <input type="email" class="form-control" id="email" placeholder="Email" inputmode="email" formControlName="email">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Phone" inputmode="tel">
+                        <input type="text" class="form-control" id="phone" placeholder="Phone" inputmode="tel" formControlName="phone">
                     </div>
                 </div>
                 <div class="form-row row">
@@ -42,19 +45,20 @@
                                 [items]="currencies" 
                                 bindLabel="Currency" 
                                 bindValue="AlphabeticCode" 
+                                formControlName="primaryCurrency"
                               >
                         </ng-select>
                         <!-- <input type="text" class="form-control" id="primaryCurrency" placeholder="Primary Currency"> -->
                     </div>
                     <div class="form-group col-md-6">
                         <label for="website">Website</label>
-                        <input type="text" class="form-control" id="website" placeholder="Website" inputmode="tel">
+                        <input type="text" class="form-control" id="website" placeholder="Website" formControlName="website">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="prefix">Prefix</label>
-                        <input type="text" class="form-control" id="prefix" placeholder="Prefix">
+                        <input type="text" class="form-control" id="prefix" placeholder="Prefix" formControlName="prefix">
                     </div>
                 </div>
             </div>
@@ -66,11 +70,11 @@
                     Billing Address
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" formGroupName="billingAddress">
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="baName">Name</label>
-                        <input type="text" class="form-control" id="baName" placeholder="Name">
+                        <input type="text" class="form-control" id="baName" placeholder="Name" formControlName="name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="baCountry">Country</label>
@@ -79,6 +83,7 @@
                                     [items]="countries" 
                                     bindLabel="name" 
                                     bindValue="code" 
+                                    formControlName="country"
                                 >
                             </ng-select>
                     </div>
@@ -86,43 +91,49 @@
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="baState">State</label>
-                        <input type="text" class="form-control" id="baState" placeholder="State">
+                        <input type="text" class="form-control" id="baState" placeholder="State" formControlName="state">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="saCity">City</label>
-                        <input type="text" class="form-control" id="saCity" placeholder="City">
+                        <input type="text" class="form-control" id="saCity" placeholder="City" formControlName="city">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="baAddress">Address</label>
-                        <input type="text" class="form-control" id="baAddress" placeholder="Address">
+                        <input type="text" class="form-control" id="baAddress" placeholder="Address" formControlName="address">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="baPhone">Phone</label>
-                        <input type="text" class="form-control" id="baPhone" placeholder="Phone" inputmode="tel">
+                        <input type="text" class="form-control" id="baPhone" placeholder="Phone" inputmode="tel" formControlName="phone">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="baZipCode">Zip Code</label>
-                        <input type="text" class="form-control" id="baZipCode" placeholder="Zip Code">
+                        <input type="text" class="form-control" id="baZipCode" placeholder="Zip Code" formControlName="zip">
                     </div>
                 </div>
             </div>
         </div>
         <hr>
+        <div class="action">
+           
+            <button class="btn btn-light" (click)="copyFromBilling()">
+                <i class="bi bi-stickies"></i> Copy From Billing
+            </button>
+        </div>
         <div class="row shipping-address">
             <div class="col-md-3">
                 <div class="section-title">
                     Shipping Address
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" formGroupName="shippingAddress">
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="saName">Name</label>
-                        <input type="text" class="form-control" id="saName" placeholder="Name">
+                        <input type="text" class="form-control" id="saName" placeholder="Name" formControlName="name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="saCountry">Country</label>
@@ -131,6 +142,7 @@
                                     [items]="countries" 
                                     bindLabel="name" 
                                     bindValue="code" 
+                                    formControlName="country"
                                 >
                             </ng-select>
                     </div>
@@ -138,27 +150,27 @@
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="saState">State</label>
-                        <input type="text" class="form-control" id="saState" placeholder="State">
+                        <input type="text" class="form-control" id="saState" placeholder="State" formControlName="state">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="saCity">City</label>
-                        <input type="text" class="form-control" id="saCity" placeholder="State">
+                        <input type="text" class="form-control" id="saCity" placeholder="City" formControlName="city">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="saAddress">Address</label>
-                        <input type="text" class="form-control" id="saAddress" placeholder="Address">
+                        <input type="text" class="form-control" id="saAddress" placeholder="Address" formControlName="address">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="saPhone">Phone</label>
-                        <input type="text" class="form-control" id="saPhone" placeholder="Phone" inputmode="tel">
+                        <input type="text" class="form-control" id="saPhone" placeholder="Phone" inputmode="tel" formControlName="phone">
                     </div>
                 </div>
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="saZipCode">Zip Code</label>
-                        <input type="text" class="form-control" id="saZipCode" placeholder="Zip Code">
+                        <input type="text" class="form-control" id="saZipCode" placeholder="Zip Code" formControlName="zip">
                     </div>
                 </div>
             </div>
@@ -174,11 +186,10 @@
                 <div class="form-row row">
                     <div class="form-group col-md-6">
                         <label for="customfields">Custom Fields</label>
-                        <input type="text" class="form-control" id="customfields" placeholder="Custom Fields">
+                        <input type="text" class="form-control" id="customfields" placeholder="Custom Fields" formControlName="customfields">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
     </form>
 </div>
