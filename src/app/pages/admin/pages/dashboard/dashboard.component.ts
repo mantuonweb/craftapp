@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { DashboardState } from './store/models/dashboard.models';
 import * as DBActions from './store/actions/dashboard.actions';
-
+import { of } from 'rxjs';
 import {
   selectDashboardTiles,
   selectDashboardExpenses,
@@ -24,6 +24,12 @@ export class DashboardComponent implements OnInit {
   gridApi: any = null;
   pointStart = Date.UTC(2022, 0, 1);
   customers$: any;
+  tiles$ = of({
+    "customers": null,
+    "amountdue": null,
+    "invoices": null,
+    "estimates": null
+  });
   chartOptions: Highcharts.Options = {
     title: {
       text: 'Sales & Expenses'
@@ -80,13 +86,10 @@ export class DashboardComponent implements OnInit {
     { field: 'amountdue', headerName: 'Amount Due' }
   ];
 
-  rowData = [
-    { dueon: '21/01/2022', customer: 'dueon', amountdue: 35000 },
-    { dueon: '21/01/2022', customer: 'customer', amountdue: 32000 },
-    { dueon: '21/01/2022', customer: 'amountdue', amountdue: 72000 }
-  ];
+  rowData = [];
   constructor(private store: Store<DashboardState>) {
     this.customers$ = this.store.select(selectDashboardCustomer);
+    this.tiles$ = this.store.select(selectDashboardTiles);
   }
 
   ngOnInit(): void {
