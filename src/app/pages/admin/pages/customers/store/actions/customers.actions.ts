@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 const TYPE = '[Customers] '
-export const loadCustomers = createAction(`${TYPE} Load Weather`);
+export const loadCustomers = createAction(`${TYPE} Load Customer`);
 
 export const loadCustomersSuccess = createAction(
   `${TYPE} Load Customer Success`,

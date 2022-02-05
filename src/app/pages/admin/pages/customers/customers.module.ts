@@ -21,3 +21,9 @@ import { CustomersEffects } from './store/effects/customers.effects';
   ]
 })
 export class CustomersModule { }
+
+
+
+ // ng generate effect pages/admin/pages/dashboard/dashboard --root -m pages/admin/pages/dashboard/dashboard.module.ts -d
+
+ // ng generate effect pages/admin/pages/dashboard/dashboard/store --root -m pages/admin/pages/dashboard/dashboard.module.ts -d
