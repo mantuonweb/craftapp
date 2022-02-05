@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { DashboardState } from './store/models/dashboard.models';
 import * as DBActions from './store/actions/dashboard.actions';
 import { of } from 'rxjs';
+import { take, delay } from 'rxjs/operators';
+
 import {
   selectDashboardTiles,
   selectDashboardExpenses,
@@ -24,6 +26,7 @@ export class DashboardComponent implements OnInit {
   gridApi: any = null;
   pointStart = Date.UTC(2022, 0, 1);
   customers$: any;
+  expenses$: any;
   tiles$ = of({
     "customers": null,
     "amountdue": null,
@@ -50,18 +53,6 @@ export class DashboardComponent implements OnInit {
     series: [{
       type: 'line',
       data: [
-        { x: Date.UTC(2021, 0, 1), y: 1 },
-        { x: Date.UTC(2021, 1, 1), y: 2 },
-        { x: Date.UTC(2021, 2, 1), y: 3 },
-        { x: Date.UTC(2021, 3, 1), y: 4 },
-        { x: Date.UTC(2021, 4, 1), y: 5 },
-        { x: Date.UTC(2021, 5, 1), y: 6 },
-        { x: Date.UTC(2021, 6, 1), y: 7 },
-        { x: Date.UTC(2021, 7, 1), y: 8 },
-        { x: Date.UTC(2021, 8, 1), y: 9 },
-        { x: Date.UTC(2021, 9, 1), y: 10 },
-        { x: Date.UTC(2021, 10, 1), y: 11 },
-        { x: Date.UTC(2021, 11, 1), y: 12 }
       ]
     }],
 
@@ -90,6 +81,14 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store<DashboardState>) {
     this.customers$ = this.store.select(selectDashboardCustomer);
     this.tiles$ = this.store.select(selectDashboardTiles);
+    this.expenses$ = this.store.select(selectDashboardExpenses);
+    this.expenses$.pipe(delay(1)).subscribe((data: any[]) => {
+      this.chartOptions.series = [{
+        type: 'line',
+        data
+      }];
+      this.chartOptions = { ...this.chartOptions };
+    });
   }
 
   ngOnInit(): void {
