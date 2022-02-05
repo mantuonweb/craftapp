@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import * as Highcharts from 'highcharts';
+import { Store } from '@ngrx/store';
+
+import { DashboardState } from './store/models/dashboard.models';
+import * as DBActions from './store/actions/dashboard.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +13,7 @@ import * as Highcharts from 'highcharts';
 })
 export class DashboardComponent implements OnInit {
   Highcharts: typeof Highcharts = Highcharts;
-  gridApi:any = null;
+  gridApi: any = null;
   pointStart = Date.UTC(2022, 0, 1);
   chartOptions: Highcharts.Options = {
     title: {
@@ -31,19 +35,19 @@ export class DashboardComponent implements OnInit {
     series: [{
       type: 'line',
       data: [
-      { x: Date.UTC(2021, 0, 1), y: 1 },
-      { x: Date.UTC(2021, 1, 1), y: 2 },
-      { x: Date.UTC(2021, 2, 1), y: 3 },
-      { x: Date.UTC(2021, 3, 1), y: 4 },
-      { x: Date.UTC(2021, 4, 1), y: 5 },
-      { x: Date.UTC(2021, 5, 1), y: 6 },
-      { x: Date.UTC(2021, 6, 1), y: 7 },
-      { x: Date.UTC(2021, 7, 1), y: 8 },
-      { x: Date.UTC(2021, 8, 1), y: 9 },
-      { x: Date.UTC(2021, 9, 1), y: 10 },
-      { x: Date.UTC(2021, 10, 1), y: 11 },
-      { x: Date.UTC(2021, 11, 1), y: 12 }
-    ]
+        { x: Date.UTC(2021, 0, 1), y: 1 },
+        { x: Date.UTC(2021, 1, 1), y: 2 },
+        { x: Date.UTC(2021, 2, 1), y: 3 },
+        { x: Date.UTC(2021, 3, 1), y: 4 },
+        { x: Date.UTC(2021, 4, 1), y: 5 },
+        { x: Date.UTC(2021, 5, 1), y: 6 },
+        { x: Date.UTC(2021, 6, 1), y: 7 },
+        { x: Date.UTC(2021, 7, 1), y: 8 },
+        { x: Date.UTC(2021, 8, 1), y: 9 },
+        { x: Date.UTC(2021, 9, 1), y: 10 },
+        { x: Date.UTC(2021, 10, 1), y: 11 },
+        { x: Date.UTC(2021, 11, 1), y: 12 }
+      ]
     }],
 
     responsive: {
@@ -63,7 +67,7 @@ export class DashboardComponent implements OnInit {
   };
   columnDefs: ColDef[] = [
     { field: 'dueon', headerName: 'Due On' },
-    { field: 'customer' , headerName: 'customer' },
+    { field: 'customer', headerName: 'customer' },
     { field: 'amountdue', headerName: 'Amount Due' }
   ];
 
@@ -72,11 +76,14 @@ export class DashboardComponent implements OnInit {
     { dueon: '21/01/2022', customer: 'customer', amountdue: 32000 },
     { dueon: '21/01/2022', customer: 'amountdue', amountdue: 72000 }
   ];
-  constructor() { }
+  constructor(private store: Store<DashboardState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(DBActions.loadDashboardCustomers());
+    this.store.dispatch(DBActions.loadDashboardTiles());
+    this.store.dispatch(DBActions.loadDashboardSalesExpenses());
   }
-  onGridReady(grid:any){
+  onGridReady(grid: any) {
     this.gridApi = grid.api;
     this.gridApi.sizeColumnsToFit();
   }
