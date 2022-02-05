@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   pointStart = Date.UTC(2022, 0, 1);
   customers$: any;
   expenses$: any;
+  subs$: any;
   tiles$ = of({
     "customers": null,
     "amountdue": null,
@@ -82,13 +83,14 @@ export class DashboardComponent implements OnInit {
     this.customers$ = this.store.select(selectDashboardCustomer);
     this.tiles$ = this.store.select(selectDashboardTiles);
     this.expenses$ = this.store.select(selectDashboardExpenses);
-    this.expenses$.pipe(delay(1)).subscribe((data: any[]) => {
+    this.subs$ = this.expenses$.pipe(delay(1)).subscribe((data: any[]) => {
       this.chartOptions.series = [{
         type: 'line',
         data
       }];
       this.chartOptions = { ...this.chartOptions };
     });
+
   }
 
   ngOnInit(): void {
@@ -99,5 +101,10 @@ export class DashboardComponent implements OnInit {
   onGridReady(grid: any) {
     this.gridApi = grid.api;
     this.gridApi.sizeColumnsToFit();
+  }
+  ngOnDestroy() {
+    if (this.subs$) {
+      this.subs$.unsubscribe();
+    }
   }
 }
