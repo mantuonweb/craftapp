@@ -8,7 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { reducers, metaReducers } from './reducers'; // Angular CLI environment
+import { reducers, metaReducers } from './store'; // Angular CLI environment
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { reducers, metaReducers } from './reducers'; // Angular CLI environment
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
