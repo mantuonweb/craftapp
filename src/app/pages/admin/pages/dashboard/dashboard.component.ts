@@ -6,6 +6,14 @@ import { Store } from '@ngrx/store';
 import { DashboardState } from './store/models/dashboard.models';
 import * as DBActions from './store/actions/dashboard.actions';
 
+import {
+  selectDashboardTiles,
+  selectDashboardExpenses,
+  selectDashboardCustomer,
+  selectDashBoardLoading,
+} from './store/selectors/dashboard.selectors';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,6 +23,7 @@ export class DashboardComponent implements OnInit {
   Highcharts: typeof Highcharts = Highcharts;
   gridApi: any = null;
   pointStart = Date.UTC(2022, 0, 1);
+  customers$: any;
   chartOptions: Highcharts.Options = {
     title: {
       text: 'Sales & Expenses'
@@ -66,8 +75,8 @@ export class DashboardComponent implements OnInit {
     }
   };
   columnDefs: ColDef[] = [
-    { field: 'dueon', headerName: 'Due On' },
-    { field: 'customer', headerName: 'customer' },
+    { field: 'addedon', headerName: 'Due On' },
+    { field: 'name', headerName: 'Customer' },
     { field: 'amountdue', headerName: 'Amount Due' }
   ];
 
@@ -76,7 +85,9 @@ export class DashboardComponent implements OnInit {
     { dueon: '21/01/2022', customer: 'customer', amountdue: 32000 },
     { dueon: '21/01/2022', customer: 'amountdue', amountdue: 72000 }
   ];
-  constructor(private store: Store<DashboardState>) { }
+  constructor(private store: Store<DashboardState>) {
+    this.customers$ = this.store.select(selectDashboardCustomer);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(DBActions.loadDashboardCustomers());
