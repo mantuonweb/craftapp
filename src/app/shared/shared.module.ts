@@ -6,7 +6,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,17 +18,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     HighchartsChartModule,
     AgGridModule.withComponents([]),
-    NgSelectModule, 
+    NgSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
-    SidebarComponent, 
-    HighchartsChartModule, 
+    SidebarComponent,
+    HighchartsChartModule,
     AgGridModule,
-    CommonModule,    
-    NgSelectModule, 
+    CommonModule,
+    NgSelectModule,
     FormsModule,
-    ReactiveFormsModule]
+    ReactiveFormsModule,
+    HttpClientModule]
 })
 export class SharedModule { }

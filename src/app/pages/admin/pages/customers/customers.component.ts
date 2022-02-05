@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadCustomers } from './store/actions/customers.actions';
+import { from, Observable } from 'rxjs';
+import {
+  selectCustomers,
+  selectCustomersLoading,
+} from './store/selectors/customers.selectors';
+
+import { CustomersState } from './store/customer.models';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -8,64 +17,70 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CustomersComponent implements OnInit {
   gridApi: any = null;
   floatingFilter = false;
+  selectLoading$: any;
+  customers$: Observable<any[]>;
+  customers: any[] = [];
   gridOptions = {
-    columnDefs:[
+    columnDefs: [
       { field: 'name', headerName: 'Name' },
       { field: 'phone', headerName: 'Phone' },
       { field: 'amountdue', headerName: 'Amount Due' },
-      { field: 'addedon', headerName: 'Added On'}
+      { field: 'addedon', headerName: 'Added On' }
     ],
-    defaultColDef:{
+    defaultColDef: {
       flex: 1,
-      width:20,
+      width: 20,
       minWidth: 20,
       resizable: true,
       filter: true,
-      floatingFilter:this.floatingFilter,
+      floatingFilter: this.floatingFilter,
       headerCheckboxSelection: this.isFirstColumn.bind(this),
       checkboxSelection: this.isFirstColumn.bind(this),
     }
   };
-  
+
 
   rowData = [
-    { name: 'test', phone: '9999999999', addedon: '21/01/2022', amountdue: 35000 },
-    { name: 'test', phone: '9999999999', addedon: '21/01/2022', amountdue: 32000 },
-    { name: 'test', phone: '9999999999', addedon: '21/01/2022', amountdue: 72000 }
   ];
   rowSelection = 'multiple';
-  constructor(private router:Router,private activatedRoute:ActivatedRoute) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private store: Store<CustomersState>) {
+    this.customers$ = this.store.select(selectCustomers);
+  }
 
   ngOnInit(): void {
+
+    this.store.dispatch(loadCustomers());
+    this.selectLoading$ = this.store.select(selectCustomersLoading);
+
   }
   onGridReady(grid: any) {
     this.gridApi = grid.api;
     this.gridApi.sizeColumnsToFit();
   }
-  toggleFloating(){
+  toggleFloating() {
     this.floatingFilter = !this.floatingFilter;
     // this.gridOptions.defaultColDef.floatingFilter =  this.floatingFilter;
     // this.gridApi.refreshHeader();
     /**
      */
-     const columnDefs = this.gridApi.getColumnDefs();
-     columnDefs.forEach((colDef:any, index:number)=> {
-        colDef.floatingFilter = this.floatingFilter;
-     });
-     this.gridApi.setColumnDefs(columnDefs);
+    const columnDefs = this.gridApi.getColumnDefs();
+    columnDefs.forEach((colDef: any, index: number) => {
+      colDef.floatingFilter = this.floatingFilter;
+    });
+    this.gridApi.setColumnDefs(columnDefs);
     //
   }
-  isFirstColumn(params:any) {
+  isFirstColumn(params: any) {
     var displayedColumns = params.columnApi.getAllDisplayedColumns();
     var thisIsFirstColumn = displayedColumns[0] === params.column;
     return thisIsFirstColumn;
   }
 
-  add(){
-    this.router.navigate(['create'],{relativeTo: this.activatedRoute})
+  add() {
+    this.router.navigate(['create'], { relativeTo: this.activatedRoute })
   }
-  edit(){
+  edit() {
     const id = 123;
-    this.router.navigate(['edit',id],{relativeTo: this.activatedRoute})
+    this.router.navigate(['edit', id], { relativeTo: this.activatedRoute })
   }
 }

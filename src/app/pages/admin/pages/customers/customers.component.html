@@ -11,7 +11,7 @@
             <i class="bi bi-plus-lg"></i> New Customer
         </button>
     </div>
-    <ag-grid-angular style="width: 100%; height: 300px;" class="ag-theme-alpine" [rowData]="rowData" [gridOptions]="gridOptions"
+    <ag-grid-angular style="width: 100%; height: calc(100vh - 200px);" class="ag-theme-alpine" [rowData]="(customers$|async)" [gridOptions]="gridOptions"
         (gridReady)="onGridReady($event)">
     </ag-grid-angular>
 </div>
